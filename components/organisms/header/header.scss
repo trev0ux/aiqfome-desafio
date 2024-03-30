@@ -1,0 +1,75 @@
+@import "../../../assets/styles/_base/variables";
+@import "../../../assets/styles/_base/typography";
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    background-color: $primary;
+
+    &__logo {
+        width: 32px;
+        overflow: hidden;
+        height: 32px;     
+        margin-right: 24px;
+
+        svg {
+            height: 100%;
+            width: 50px;
+        }
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+    } 
+
+    &__address {
+        display: flex;
+        align-items: center;
+
+        > div {
+            display: flex;
+            align-items: flex-end;
+
+            p {
+                color: $white;
+                display: inline;
+                @include font-size($font-small);
+                font-family: $font-family--primary;
+                margin-bottom: 0;
+                font-weight: bold;
+                line-height: 1;
+                color: $rose;
+    
+                b {
+                    display: block;
+                    margin-top: 4px;
+                    @include font-size($font-regular);
+                    color: $white;
+                }
+            }
+
+            svg {
+                height: 12px;
+                width: 12px;
+                stroke: $white;
+                margin-left: 4px;
+                margin-bottom: 3px;
+            }
+        }
+
+        > svg {
+            width: 22px;
+            height: 22px;
+            margin-right: 16px;
+        }
+    }
+
+    &__user {
+        height: 24px;
+        width: 22px;
+    }
+}

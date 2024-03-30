@@ -1,0 +1,27 @@
+@import "../../../assets/styles/_base/variables";
+@import "../../../assets/styles/_base/typography";
+
+.footer {
+    background-color: $grey--100;
+    padding-top: 24px;
+    padding-bottom: 24px;
+
+    h5,
+    h6 {
+        line-height: 1.2;
+        color: $primary;
+        font-family: $font-family--primary;
+        font-weight: $font-weight--bold;
+        @include font-size($font-regular);
+        text-align: center;
+    }
+
+    h5 {
+        @include font-size($font-small); 
+        margin-bottom: 8px; 
+    }
+
+    h6 {
+        @include font-size($font-regular);
+    }
+}
