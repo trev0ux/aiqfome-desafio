@@ -1,65 +1,65 @@
 <template>
-  <div class="form-radio">
+  <div class="form-check custom-form-check">
+      <input
+          type="checkbox"
+          class="form-check-input custom-form-check__input"
+          :class="dataError ? 'is-invalid' : null"
+          :value="modelValue"    
+          v-bind="$attrs"
+          @change="toggle">
       <label
-          v-if="label"
-          class="form-label d-block">{{ label }}</label>
+          class="form-check-label custom-form-check__label"
+          :for="$attrs.id"
+          v-if="label">{{ label }}</label>
       <div
-          v-for="option in options"
-          :class="{'form-check-inline': inline}"
-          :key="option.id"
-          class="form-check">
-          <input
-              @input="$emit('update:modelValue', $event.target.value)"
-              :checked="modelValue === option.value"
-              type="radio"
-              :class="{'is-invalid': errorMessage}"
-              class="form-check-input"
-              :disabled="option.disabled"
-              :value="option.value"
-              :id="option.id"
-              :="$attrs">
-          <label
-              :for="option.id"
-              class="form-check-label">{{ option.label }}</label>
-      </div>
-      <div v-if="errorMessage">
-          <input
-              type="hidden"
-              class="is-invalid"
-              id="errorMessage"
-              name="errorMessage">
-          <div class="invalid-feedback">
-              {{ errorMessage }}
-          </div>
+          v-if="dataError"
+          class="invalid-feedback">
+          {{ dataError }}
       </div>
   </div>
 </template>
 
 <script>
   export default {
-      name: "FormRadio",
+      name: "CustomCheckbox",
       inheritAttrs: false,
+      data() {
+          return {
+              dataError: this.errorMessage,
+          };
+      },
       props: {
-          modelValue: {
-              type: String,
-              required: true
-          },
-          options: {
-              type: Array,
-              required: true
-          },
           label: {
               type: String,
-              required: false
+              required:false
+          },
+          modelValue: {
+              type: Boolean,
+              default: false,
           },
           errorMessage: {
               type: String,
-              required: false
+              required:false
           },
-          inline: {
-              type: Boolean,
-              required: false
+      },
+      watch: {
+          errorMessage() {
+              this.dataError = this.errorMessage;
+          }
+      },
+      computed: {
+          sizeClass() {
+              return `form-check-${this.size}`;
+          }
+      },
+      methods: {
+          toggle() {
+              this.$emit("update:modelValue", !this.modelValue);
           }
       }
   };
 </script>
+
+<style lang="scss" scoped>
+@import "./form-check.scss";
+</style>

@@ -1,11 +1,10 @@
 <template>
-  <footer class="footer container">
-    <h5>
-        feito com 💜 em Maringá-PR
-    </h5>
-    <h6>
-      aiqfome.com © 2007-2023 aiqfome LTDA . CNPJ: 09.186.786/0001-58
-    </h6>
+  <footer class="footer">
+    <div class="container">
+      <h5>feito com 💜 em maringá-PR</h5>
+      <button class="btn btn-primary">ver ticket</button>
+      <h6>aiqfome.com © 2007-2023 aiqfome LTDA . CNPJ: 09.186.786/0001-58</h6>
+    </div>
   </footer>
 </template>
 

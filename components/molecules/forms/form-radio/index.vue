@@ -1,8 +1,5 @@
 <template>
-  <div class="form-radio">
-      <label
-          v-if="label"
-          class="form-label d-block">{{ label }}</label>
+  <div class="form-radio custom-form-radio">
       <div
           v-for="option in options"
           :class="{'form-check-inline': inline}"
@@ -13,21 +10,16 @@
               :checked="modelValue === option.value"
               type="radio"
               :class="{'is-invalid': errorMessage}"
-              class="form-check-input"
+              class="form-check-input custom-form-radio__input"
               :disabled="option.disabled"
               :value="option.value"
               :id="option.id"
               :="$attrs">
           <label
               :for="option.id"
-              class="form-check-label">{{ option.label }}</label>
+              class="form-check-label custom-form-radio__label">{{ option.label }}</label>
       </div>
       <div v-if="errorMessage">
-          <input
-              type="hidden"
-              class="is-invalid"
-              id="errorMessage"
-              name="errorMessage">
           <div class="invalid-feedback">
               {{ errorMessage }}
           </div>
@@ -64,5 +56,5 @@
   };
 </script>
   <style lang="scss">
-  @import "./form-radio";
+  @import "./form-radio.scss";
   </style>
