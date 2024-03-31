@@ -1,8 +1,8 @@
 
 @import "./_base/typography";
 @import "./_base/variables";
-@import "./_components/atoms/_buttons";
 @import "bootstrap/scss/bootstrap";
+@import "./_components/atoms/_buttons";
 
 body {
   font-family: $font-family--primary;

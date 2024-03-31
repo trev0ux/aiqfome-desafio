@@ -1,5 +1,8 @@
 @import "../../../assets/styles/_base/variables";
 @import "../../../assets/styles/_base/typography";
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
 
 .header {
     background-color: $primary;
@@ -10,6 +13,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        @include media-breakpoint-up(lg) {
+           gap: 24px;
+           padding: 0 64px;
+           max-width: 1440px;
+        }
     }
 
     &__logo {
@@ -18,9 +27,19 @@
         height: 32px;     
         margin-right: 24px;
 
+        @include media-breakpoint-up(lg) {
+            width: auto;
+            overflow: visible;
+        }
+        
         svg {
             height: 100%;
             width: 50px;
+
+            @include media-breakpoint-up(lg) {
+              width: 73px;
+              height: 40px;
+            }
         }
     }
 
@@ -68,6 +87,54 @@
             width: 22px;
             height: 22px;
             margin-right: 16px;
+        }
+    }
+
+    &__search-bar {
+        display: none;
+
+        @include media-breakpoint-up(lg) {
+            position: relative;
+            display: block;
+
+            > form {
+                display: flex;
+                align-items: center;
+
+                input {
+                    min-width: 420px;
+                    padding-left: 40px;
+                    height: 40px;
+                    border-radius: 8px;
+                }
+
+                input::placeholder {
+                    color: $grey--300;
+                    font-family: $font-family--primary;
+                    font-weight: $font-weight--semibold;
+                    @include font-size($font-small);
+                    opacity: 1;
+                }
+            }
+
+            button {
+                position: absolute;
+                left: 10px;
+
+                svg {
+                    height: 24px;
+                    width: 24px;
+                }
+            }
+        }
+    }
+
+    &__button {
+        display: none;
+
+        @include media-breakpoint-up(lg) {
+            display: flex;
+            column-gap: 24px;
         }
     }
 

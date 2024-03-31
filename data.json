@@ -1,8 +1,9 @@
 {
     "order": [
        {
-         "id": "0",
+         "id": "1",
          "name": "Ceviche de salmão",
+         "slug": "ceviche-de-salmao",
          "currency": "R$",
          "price": "19.90",
          "description": "salmão temperado com limão, cebola e pimenta",

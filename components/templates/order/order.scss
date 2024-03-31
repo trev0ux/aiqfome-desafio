@@ -1,15 +1,68 @@
 @import "../../../assets/styles/_base/variables";
 @import "../../../assets/styles/_base/typography";
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
 
-.checkout {
+
+.order {
     position: relative;
 
-    &__order-details {
+    &__shop-details {
+        display: none;
+        align-items: center;
+        padding: 24px 64px;
+        max-width: 1440px;
+
+        @include media-breakpoint-up(lg) {
+            display: flex;
+        }
+
+
+        h2 {
+            font-family: $font-family--primary;
+            font-weight: $font-weight--bold;
+            color: $grey--400;
+            @include font-size($font-big);
+            margin-bottom: 0px;
+            margin-left: 8px;
+        }
+    }
+
+    hr {
+        width: 100%;
+        border: 2px solid  $grey--100;
+        opacity: 1;
+    }
+
+    &__details {
         margin-bottom: 16px;
+
+        @include media-breakpoint-up(lg) {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: flex-start;
+        }
 
         img {
             width: 100%;
             margin-bottom: 16px;
+            width: 100vw;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            position: relative;
+
+            @include media-breakpoint-up(lg) {
+                    border-radius: 12px;
+                    width: 390px;
+                    margin-left: initial;
+                    margin-right: initial;
+                    position: initial;
+                    height: 195px;
+                    margin-bottom: 0;
+            }
         }
 
         h1 {
@@ -46,8 +99,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 16px;
-            border-bottom: 4px solid $grey--100;
+            padding: 16px 0;
+            
+            @include media-breakpoint-up(lg) {
+                margin: 44px 0 0;
+                padding: 0;
+                border-bottom: none;
+                max-width: 360px;
+            }
         }
 
         h4 {
@@ -72,6 +131,7 @@
         &--discount {
             color: $grey--300;
             font-weight: $font-weight--bold;
+            margin-bottom: 0;
 
             @include font-size($font-x-small);
 
@@ -103,7 +163,31 @@
             }
         }
 
+        > div {
+            @include media-breakpoint-up(lg) {
+                display: flex;
+                flex-wrap: wrap;
+                column-gap: 60px;
+            }
+
+            > div {
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                @include media-breakpoint-up(lg) {
+                    column-gap: 80px;
+                }
+            }
+        }
+
         legend {
+            
+            @include media-breakpoint-up(lg) {
+                margin-bottom: 16px;
+            }
+
             p {
                 color: $grey--300;
                 font-weight: $font-weight--semibold;
@@ -120,13 +204,6 @@
                 color: $white;
                 @include font-size($font-x-small);
             }
-        }
-
-        > div > div {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
     }
 

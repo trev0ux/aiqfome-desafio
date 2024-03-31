@@ -1,6 +1,31 @@
-.btn-primary,
-.btn-secondary {
+@import "../../_base/_typography";
+@import "../../_base/_variables";
+
+.btn {
     border-radius: 8px;
     padding: 13px 24px;
     font-weight: $font-weight--bold;
+
+    &-light {
+        background-color: $rose;
+        color: $primary;
+
+        &:hover {
+            background-color: $white;
+            color: $primary;       
+        }
+    }
+
+    &-info {
+        background-color: $blue;
+        color: $white;
+        border-color: $blue;
+
+        &:hover {
+            background-color: $blue;
+            color: $white;
+            border-color: $blue;   
+        }
+    }
+    
 }

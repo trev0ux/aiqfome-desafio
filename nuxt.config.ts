@@ -18,6 +18,15 @@ export default defineNuxtConfig({
     githubURL: process.env.GITHUB_API,
     githubToken: process.env.GITHUB_TOKEN,
   },
+  router: {
+    extendRoutes(routes) {
+      routes.push({
+        name: 'order-slug',
+        path: '/order/:slug',
+        component: '@/pages/order/[slug].vue',
+      });
+    },
+  },
   apollo: {
     authType: "Bearer",
     authHeader: "Authorization",
