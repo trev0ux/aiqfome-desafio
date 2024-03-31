@@ -1,0 +1,71 @@
+{
+    "order": [
+       {
+         "id": "0",
+         "name": "Ceviche de salmão",
+         "currency": "R$",
+         "price": "19.90",
+         "description": "salmão temperado com limão, cebola e pimenta",
+         "size": [
+           {
+             "id": 1,
+             "label": "médio",
+             "price": 22.9,
+             "discount": 3.0
+           },
+           {
+             "id": 2,
+             "value": "lg",
+             "label": "grande",
+             "price": 28.9,
+             "discount": 0
+           }
+         ],
+         "drink": [
+           {
+             "id": 1,
+             "name": "coca-cola",
+             "price": 5.0,
+             "quantity": 0
+           },
+           {
+             "id": 2,
+             "name": "suco prats laranja",
+             "price": 6.0,
+             "quantity": 0
+           },
+           {
+            "id": 3,
+            "name": "água sem gás",
+            "price": 3.0,
+            "quantity": 0
+          }
+         ],
+         "utensil": [
+           {
+             "id": 1,
+             "label": "hashi",
+             "price": 0
+           },
+           {
+             "id": 2,
+             "label": "garfo e faca descartável",
+             "price": 1.0
+           }
+         ],
+         "other": [
+           {
+             "id": 1,
+             "name": "biscoito da sorte",
+             "price": 2.0
+           },
+           {
+             "id": 2,
+             "name": "rolinho primavera",
+             "price": 8.0
+           }
+         ]
+       }
+    ]
+   }
+   

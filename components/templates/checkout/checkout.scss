@@ -2,6 +2,7 @@
 @import "../../../assets/styles/_base/typography";
 
 .checkout {
+    position: relative;
 
     &__order-details {
         margin-bottom: 16px;
@@ -27,7 +28,7 @@
 
             b {
                 color: $primary;
-                font-weight: $font-weight--black;
+                font-weight: $font-weight--extra-bold;
                 @include font-size($font-medium);
             }
         }
@@ -36,7 +37,7 @@
             color: $grey--300;
             font-weight: $font-weight--semibold;
             margin-bottom: 0;
-            @include font-size($font-small)
+            @include font-size($font-small);
         }
     }
 
@@ -44,6 +45,7 @@
         > div {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding-bottom: 16px;
             border-bottom: 4px solid $grey--100;
         }
@@ -53,11 +55,30 @@
             font-weight: $font-weight--semibold;
             @include font-size($font-small);
 
-
             b {
                 color: $grey--400;
-                font-weight: $font-weight--bold; 
-                @include font-size($font-medium);   
+                font-weight: $font-weight--bold;
+                @include font-size($font-medium);
+            }
+        }
+    }
+
+    &__price {
+        @include font-size($font-small);
+        color: $primary;
+        font-weight: $font-weight--bold;
+        margin-bottom: 0;
+
+        &--discount {
+            color: $grey--300;
+            font-weight: $font-weight--bold;
+
+            @include font-size($font-x-small);
+
+            b {
+                color: $green;
+                font-weight: $font-weight--bold;
+                @include font-size($font-small);
             }
         }
     }
@@ -87,9 +108,10 @@
                 color: $grey--300;
                 font-weight: $font-weight--semibold;
                 @include font-size($font-x-small);
+                margin-bottom: 0;
             }
 
-            span {
+            > span {
                 background-color: $grey--400;
                 display: block;
                 border-radius: 4px;
@@ -97,14 +119,27 @@
                 font-weight: $font-weight--bold;
                 color: $white;
                 @include font-size($font-x-small);
-
             }
         }
 
         > div > div {
             margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-
     }
-    
+
+    &__submit {
+        background-color: $grey--100;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+
+        button {
+            width: 100%;
+        }
+    }
 }

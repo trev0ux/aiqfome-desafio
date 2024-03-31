@@ -7,17 +7,20 @@
           class="form-check">
           <input
               @input="$emit('update:modelValue', $event.target.value)"
-              :checked="modelValue === option.value"
               type="radio"
               :class="{'is-invalid': errorMessage}"
               class="form-check-input custom-form-radio__input"
               :disabled="option.disabled"
               :value="option.value"
-              :id="option.id"
-              :="$attrs">
+              v-bind="$attrs"
+              :id="id"
+              >
           <label
-              :for="option.id"
-              class="form-check-label custom-form-radio__label">{{ option.label }}</label>
+              :for="id"
+              class="form-check-label custom-form-radio__label">
+                <slot name="icon">
+                </slot>
+              {{ option.label }}</label>
       </div>
       <div v-if="errorMessage">
           <div class="invalid-feedback">
@@ -32,9 +35,9 @@
       name: "FormRadio",
       inheritAttrs: false,
       props: {
-          modelValue: {
-              type: String,
-              required: true
+          id: {
+            type: String,
+            required: true
           },
           options: {
               type: Array,

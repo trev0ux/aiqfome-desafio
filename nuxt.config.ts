@@ -1,3 +1,4 @@
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
@@ -11,5 +12,21 @@ export default defineNuxtConfig({
   },
   modules: [
     'nuxt-icon',
+    '@nuxtjs/apollo',
   ],
+  runtimeConfig: {
+    githubURL: process.env.GITHUB_API,
+    githubToken: process.env.GITHUB_TOKEN,
+  },
+  apollo: {
+    authType: "Bearer",
+    authHeader: "Authorization",
+    tokenStorage: "cookie",
+    clients: {
+      default: {
+        tokenName: "github-token",
+        httpEndpoint: "http://localhost:4000/graphql",
+      },
+    },
+  },
 })

@@ -20,10 +20,37 @@
         border: 1px solid $blue;  
        }
 
+       &:focus {
+        box-shadow: 0 0 0 0.25rem rgba($blue, 0.25);
+       }
+
        svg {
            height: 11px;
            width: 11px;
            fill: $blue;
+       }
+
+       &--md {
+           width: 24px;
+           height: 24px;
+
+           svg {
+               width: 8px;
+               height: 8px;
+           }
+       }
+
+       &--lg {
+           border: none;
+
+           &:hover {
+            border: none;  
+           }
+
+           svg {
+               width: 32px;
+               height: 32px;
+           }
        }
 
        &--less-than-zero {

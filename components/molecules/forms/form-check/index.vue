@@ -4,7 +4,6 @@
           type="checkbox"
           class="form-check-input custom-form-check__input"
           :class="dataError ? 'is-invalid' : null"
-          :value="modelValue"    
           v-bind="$attrs"
           @change="toggle">
       <label
@@ -33,10 +32,6 @@
               type: String,
               required:false
           },
-          modelValue: {
-              type: Boolean,
-              default: false,
-          },
           errorMessage: {
               type: String,
               required:false
@@ -47,16 +42,6 @@
               this.dataError = this.errorMessage;
           }
       },
-      computed: {
-          sizeClass() {
-              return `form-check-${this.size}`;
-          }
-      },
-      methods: {
-          toggle() {
-              this.$emit("update:modelValue", !this.modelValue);
-          }
-      }
   };
 </script>
 

@@ -1,21 +1,39 @@
 <template>
   <div class="quantity-control">
-    <button
-      :class="
-        'btn quantity-control__button ' +
-        (quantity <= 0 ? 'quantity-control__button--less-than-zero disabled' : '')
-      "
-      type="button"
-      aria-label="Remover"
-      @click="decrementQuantity"
-    >
-      <Icon name="Less"></Icon>
-    </button>
+    <slot name="less-button">
+      <button
+        :class="
+          'btn quantity-control__button  ' +
+          (size == 'md' ? 'quantity-control__button--md ' : '') +
+          (quantity <= 0
+            ? 'quantity-control__button--less-than-zero disabled'
+            : '')
+        "
+        v-if="size == 'md' || (size == 'lg' && quantity > 1)"
+        type="button"
+        aria-label="Remover"
+        @click="decrementQuantity"
+      >
+        <Icon name="Less"></Icon>
+      </button>
+      <button
+        type="button"
+        class="btn quantity-control__button quantity-control__button--lg"
+        aria-label="Remover"
+        @click="decrementQuantity"
+        v-else-if="size === 'lg' && quantity == 1"
+      >
+        <Icon name="Trash"></Icon>
+      </button>
+    </slot>
     <span :id="id">
       {{ quantity }}
     </span>
     <button
-      class="btn quantity-control__button"
+      :class="
+        'btn quantity-control__button  ' +
+        (size == 'md' ? 'quantity-control__button--md' : '')
+      "
       type="button"
       aria-label="Adicionar"
       @click="incrementQuantity"
@@ -39,8 +57,9 @@ export default {
     label: String,
     quantity: {
       type: Number,
-      default: 0
+      default: 0,
     },
+    size: String,
   },
   components: {
     Icon,

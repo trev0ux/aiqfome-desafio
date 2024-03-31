@@ -10,13 +10,20 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/apollo": "^5.0.0-alpha.14",
+    "@vue/apollo-composable": "^4.0.2",
     "bootstrap": "^5.3.3",
+    "graphql-tag": "^2.12.6",
+    "json-graphql-server": "^2.3.2",
     "nuxt": "^3.11.1",
+    "nuxt-graphql-client": "^0.2.33",
     "sass": "^1.72.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@graphql-tools/mock": "^9.0.2",
+    "@graphql-tools/schema": "^10.0.3",
     "nuxt-icon": "^0.6.10",
     "rfs": "^10.0.0"
   }
