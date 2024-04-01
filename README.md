@@ -3,11 +3,10 @@ Antes de mais nada gostaria de dizer que foi um prazer fazer esse desafio durant
 
 Apliquei uma série de padrões e metodologias como BEM e Atomic Design para garantir um produto escalável e de fácil manutenibilidade focado na experiência dos usuários e também dos desenvolvedores.
 
-Criei um mock data vindo de um servidor GraphQL para tentar me aproximar ao máximo da realidade de vocês com o uso da ferramenta.
-
 ### Tecnologias e metodologias utilizadas:
  - HTML
  - SCSS
+ - Bootstrap 5
  - Metodologia BEM
  - JavaScript
  - Vue3
@@ -70,7 +69,7 @@ npm i json-graphql-server -g
 json-graphql-server data.json  --p 4000
 ```
 ```bash
-# Acesse a url:
+# Acesse o navegador e insira a url:
 https://localhost:4000
 ```
 
@@ -99,6 +98,12 @@ https://localhost:4000
 }
 ```
 
+
+Criei um mock chamado `data.json` com as informações dos produtos enviando para um servidor GraphQL para tentar me aproximar ao máximo da realidade de vocês com o uso da ferramenta.
+
+![data json](https://github.com/trev0ux/aiqfome-desafio/assets/47607723/419d1142-2c94-406d-a845-bcc8fd50410d)
+
+
 ## Premissas e entendendo as funcionalidades
 
 ![firefox_ANRyMJoWgK](https://github.com/trev0ux/aiqfome-desafio/assets/47607723/3067d291-148a-4fb9-a6ab-36a8da865533)
@@ -121,7 +126,7 @@ https://localhost:4000
 
 ![image](https://github.com/trev0ux/aiqfome-desafio/assets/47607723/a4ee02b5-b107-4411-b2ab-62803d3c777f)
 
-### Abordagem Mobile First com breakpoints entendendo que a maioria dos usuários desse produto usam mobile
+### Abordagem Mobile First com a lógica de large screens ser feito por último usando breakpoints
 
 ![ray-so-export (2)](https://github.com/trev0ux/aiqfome-desafio/assets/47607723/18be144f-303a-4c7a-895c-bd814e330d9a)
 
@@ -135,7 +140,8 @@ https://localhost:4000
 
 - Uso do Stylelint e do ESLINT
 - Comprimir imagens
-- Refatorar o código 
+- Refatorar o código
+- Método POST com as informações do formulário
 
 
 
