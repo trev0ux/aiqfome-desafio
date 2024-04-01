@@ -116,7 +116,7 @@ Criei um mock chamado `data.json` com as informações dos produtos enviando par
 - Cada produto deve ter uma tela especifica para que o pedido seja feito
 
 
-## Agora, tentarei expor e descrever ao longo desse arquivo minhas tomadas de decisão no código construído.
+## Tomadas de decisão no processo de desenvolvimento
 
 ### Padrão da criação de classes de estilo: BEM com o SCSS:
 
