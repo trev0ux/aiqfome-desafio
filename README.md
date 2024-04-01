@@ -142,6 +142,7 @@ Criei um mock chamado `data.json` com as informações dos produtos enviando par
 - Comprimir imagens
 - Refatorar o código
 - Método POST com as informações do formulário
+- Inserir propriedades no localStorage
 
 
 
