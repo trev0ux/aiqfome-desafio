@@ -108,7 +108,7 @@ Para simular um servidor GraphQL criei um mock chamado `data.json` com as inform
 ![firefox_ANRyMJoWgK](https://github.com/trev0ux/aiqfome-desafio/assets/47607723/3067d291-148a-4fb9-a6ab-36a8da865533)
 
 - O usuário pode adicionar e remover quantidades do produto e esse valor refletir no preço total exibido
-- O usuário pode escolher o tamanho do produto e será enviado um objeto com preço, nome e tamanho
+- O usuário pode escolher um tamanho de produto e enviar seus detalhes com preço, nome e tamanho
 - As bebidas o usuário pode iterar adicionando ou removendo um novo item
 - O usuário pode escolher um utensilio e um objeto com informações detalhadas do utensilio ser enviado
 - O usuário pode escolher multiplo valores de itens adicionais, podendo ser adicionado, mudado ou removido cada valor escolhido
