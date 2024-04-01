@@ -118,7 +118,7 @@
           <legend>
             <div>
               <h3>precisa de talher?</h3>
-              <p>escolha quantos quiser</p>
+              <p>escolha até 1</p>
             </div>
           </legend>
           <div v-for="utensil in utensils" :key="utensil.id">
