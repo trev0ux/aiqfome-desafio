@@ -11,7 +11,6 @@
               :class="{'is-invalid': errorMessage}"
               class="form-check-input custom-form-radio__input"
               :disabled="option.disabled"
-              :value="option.value"
               v-bind="$attrs"
               :id="id"
               >

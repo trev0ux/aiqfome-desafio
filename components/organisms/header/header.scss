@@ -1,5 +1,5 @@
-@import "../../../assets/styles/_base/variables";
-@import "../../../assets/styles/_base/typography";
+@import "../../../styles/_base/variables";
+@import "../../../styles/_base/typography";
 @import "bootstrap/scss/_functions";
 @import "bootstrap/scss/_variables";
 @import "bootstrap/scss/mixins/_breakpoints";
@@ -135,6 +135,11 @@
         @include media-breakpoint-up(lg) {
             display: flex;
             column-gap: 24px;
+
+            svg {
+                height: 24px;
+                width: 22px;
+            }
         }
     }
 

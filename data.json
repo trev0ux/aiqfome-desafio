@@ -7,6 +7,12 @@
          "currency": "R$",
          "price": "19.90",
          "description": "salmão temperado com limão, cebola e pimenta",
+         "shop": [
+           {
+             "id": 1,
+             "name": "Matsuri Concept"
+           }
+         ],
          "size": [
            {
              "id": 1,
@@ -57,12 +63,12 @@
          "other": [
            {
              "id": 1,
-             "name": "biscoito da sorte",
+             "label": "biscoito da sorte",
              "price": 2.0
            },
            {
              "id": 2,
-             "name": "rolinho primavera",
+             "label": "rolinho primavera",
              "price": 8.0
            }
          ]

@@ -1,8 +1,11 @@
 <template>
   <div class="order">
     <section class="order__shop-details container">
-      <img src="../../../assets/images/logo-1.png" />
-      <h2>Matsuri Concept</h2>
+      <img
+        src="../../../assets/images/logo-1.png"
+        alt="Mitsuri Concept Imagem"
+      />
+      <h2>Mitsuri Concept</h2>
     </section>
     <form type="submit" @submit.prevent="submitForm">
       <section class="order__details container">
@@ -23,8 +26,8 @@
                   total
                   <b
                     >{{ order.currency }}
-                    {{ (order.price * orderQuantity).toFixed(2) }}</b
-                  >
+                    {{ orderTotal(order.price) }}
+                  </b>
                 </h4>
               </div>
               <button
@@ -55,18 +58,15 @@
             <div>
               <h3>qual o tamanho?</h3>
               <p>escolha 1</p>
-              <span v-if="orderSize.length > 0" class="invalid-feedback">
-                Por favor, selecione um tamanho
-              </span>
             </div>
             <span>obrigatório</span>
           </legend>
-          <div v-for="(size, index) in order.size" :key="index">
+          <div v-for="(size, index) in sizes" :key="index">
             <form-radio
-              v-model="orderSize"
-              :error-message="validation.invalid.format"
+              v-model="selectedSize"
               name="tamanho"
               v-bind="$attrs"
+              :value="size.id"
               required
               :id="'size-' + index"
               :label="size.name"
@@ -121,19 +121,20 @@
               <p>escolha quantos quiser</p>
             </div>
           </legend>
-          <div v-for="utensil in order.utensil" :key="utensil.id">
+          <div v-for="utensil in utensils" :key="utensil.id">
             <form-radio
-              v-model="orderUtensil"
-              :error-message="validation.invalid.format"
+              v-model="selectedUtensil"
               name="utensilhos"
+              v-bind="$attrs"
+              :value="utensil.id"
               :id="'utensils-' + utensil.id"
               :label="utensil.name"
               :options="[utensil]"
               inline
             />
-            <h4 class="order__price">
+            <h4 class="order__price" v-if="utensil.price > 0">
               + {{ order.currency }}
-              {{ utensil.price > 0 ? utensil.price.toFixed(2) : "" }}
+              {{ utensil.price.toFixed(2) }}
             </h4>
           </div>
         </div>
@@ -147,18 +148,17 @@
               <p>escolha até 2</p>
             </div>
           </legend>
-          <div v-for="other in order.other" :key="other.id">
+          <div v-for="other in others" :key="other.id">
             <form-check
-              v-model="orderAdditionals"
-              :error-message="validation.invalid.format"
+              v-bind="$attrs"
+              v-model="selectedOther"
               name="outros"
-              :label="other.name"
+              :label="other.label"
               :id="'others-' + other.id"
-              :="$attrs"
-              :options="[other]"
+              :value="other.id"
               inline
             />
-            <h4 class="order__price">
+            <h4 class="order__price" v-if="other">
               + {{ order.currency }} {{ other.price.toFixed(2) }}
             </h4>
           </div>
@@ -177,9 +177,6 @@
 import FormRadio from "../components/molecules/forms/form-radio/index.vue";
 import FormCheck from "../components/molecules/forms/form-check/index";
 import QuantityControl from "../components/molecules/quantity-control/index";
-import { ref } from 'vue';
-import { useMutation } from '@vue/apollo-composable';
-import { gql } from '@apollo/client/core';
 
 export default {
   name: "order",
@@ -197,50 +194,49 @@ export default {
   data() {
     return {
       drinks: [],
+      utensils: [],
+      sizes: [],
+      others: [],
       orderQuantity: 0,
       orderPrice: 29.9,
-      orderSize: [],
-      orderUtensil: "",
-      orderAdditionals: "",
-      validation: {
-        invalid: {},
-      },
+      totalPrice: 0,
+      selectedSize: "",
+      selectedUtensil: "",
+      selectedOther: "",
+      aggregatedDrinksObj: {},
     };
   },
   created() {
     this.populateDrinks();
-  },
-  setup() {
-    const name = ref('');
-    const submitted = ref(false);
-
-
-    const mutation = gql`
-      mutation SubmitOrder($input: OrderInput!) {
-        submitOrder(input: $input) {
-          id
-        }
-      }
-    `;
-
-    const { mutate: submitOrder } = useMutation(mutation);
-
-    const submitForm = async () => {
-      try {
-        await submitOrder({ input: formData.value });
-        console.log('Order submitted successfully');
-        submitted.value = true;
-      } catch (error) {
-        console.error('Error submitting order:', error);
-      }
-    };
-    return {
-      name,
-      submitted,
-      submitForm,
-    };
+    this.populateSize();
+    this.populateUtensils();
+    this.populateAdditionals();
   },
   methods: {
+    orderTotal(price) {
+      this.totalPrice = price * this.orderQuantity;
+      return this.totalPrice.toFixed(2);
+    },
+    aggregatedDrinks(updatedDrink) {
+      if (!this.aggregatedDrinksObj) {
+        this.aggregatedDrinksObj = {};
+      }
+      const { id, name, quantity, price } = updatedDrink;
+      const totalPrice = (quantity + 1) * price;
+
+      if (this.aggregatedDrinksObj.hasOwnProperty(name)) {
+        this.aggregatedDrinksObj[name].price = totalPrice;
+      } else {
+        this.aggregatedDrinksObj[name] = {
+          id,
+          name,
+          price: totalPrice,
+          quantity: quantity + 1,
+        };
+      }
+
+      return Object.values(this.aggregatedDrinksObj);
+    },
     applyDiscount(price, discount) {
       const count = price - discount;
       return count.toFixed(2);
@@ -251,8 +247,9 @@ export default {
     handleDrinkQuantityUpdate(id, newQuantity) {
       const drink = this.drinks.find((d) => d.id === id);
       if (drink) {
+        const updatedDrink = { ...drink };
         drink.quantity = newQuantity;
-        console.log(drink);
+        this.aggregatedDrinks(updatedDrink);
       }
     },
     populateDrinks() {
@@ -261,10 +258,63 @@ export default {
           name: drink.name,
           id: drink.id,
           price: drink.price,
-          currency: drink.currency,
           quantity: 0,
         });
       });
+    },
+    populateSize() {
+      this.order.size.forEach((size) => {
+        this.sizes.push({
+          label: size.label,
+          id: size.id,
+          price: size.price,
+          discount: size.discount,
+        });
+      });
+    },
+    populateUtensils() {
+      this.order.utensil.forEach((utensil) => {
+        this.utensils.push({
+          id: utensil.id,
+          label: utensil.label,
+          price: utensil.price,
+        });
+      });
+    },
+    populateAdditionals() {
+      this.order.other.forEach((other) => {
+        this.others.push({
+          id: other.id,
+          label: other.label,
+          price: other.price,
+        });
+      });
+    },
+    submitForm() {
+      let othersSelected = [];
+      this.others.forEach((other) => {
+        othersSelected.push(other);
+      });
+
+      let formData = {
+        ticket: {
+          name: this.order.name,
+          quantity: this.orderQuantity,
+          price: this.totalPrice.toFixed(2),
+          description: this.order.description,
+          currency: this.order.currency,
+          size: this.sizes.filter(
+            (size) => size.id === parseInt(this.selectedSize)
+          ),
+          drink: Object.values(this.aggregatedDrinksObj),
+          utensil: this.utensils.filter(
+            (utensil) => utensil.id === parseInt(this.selectedUtensil)
+          ),
+          other: othersSelected,
+        },
+      };
+
+      console.log(formData);
     },
   },
 };

@@ -1,0 +1,16 @@
+query GetOrder($id: ID!) {
+  Order(id: $id) {
+    id
+    slug
+    name
+    image
+    shop
+    currency
+    description
+    price
+    size
+    drink
+    utensil
+    other
+  }
+}

@@ -2,12 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
-    { src: './assets/styles/globals.scss', lang: 'sass' },
-    { src: './assets/styles/reset.scss', lang: 'sass' }
+    { src: '/styles/globals.scss', lang: 'sass' },
+    { src: '/styles/reset.scss', lang: 'sass' }
   ],
   app: {
     head: {
-      title: "Ai q fome",
+      title: "aiqfome - desafio",
     }
   },
   modules: [
@@ -17,15 +17,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     githubURL: process.env.GITHUB_API,
     githubToken: process.env.GITHUB_TOKEN,
-  },
-  router: {
-    extendRoutes(routes) {
-      routes.push({
-        name: 'order-slug',
-        path: '/order/:slug',
-        component: '@/pages/order/[slug].vue',
-      });
-    },
   },
   apollo: {
     authType: "Bearer",

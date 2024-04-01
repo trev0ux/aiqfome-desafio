@@ -4,8 +4,8 @@
           type="checkbox"
           class="form-check-input custom-form-check__input"
           :class="dataError ? 'is-invalid' : null"
-          v-bind="$attrs"
-          @change="toggle">
+          @input="$emit('update:modelValue', $event.target.value)"
+          v-bind="$attrs">
       <label
           class="form-check-label custom-form-check__label"
           :for="$attrs.id"

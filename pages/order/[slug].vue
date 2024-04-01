@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">Loading...</div>
-    <div v-else-if="error">Error: {{ error.message }}</div>
+    <div v-else-if="error" class="invalid-feedback">Error: {{ error.message }}</div>
     <order-template v-if="order" :order="order"></order-template>
   </div>
 </template>
@@ -9,14 +9,13 @@
 <script setup>
 import OrderTemplate from "../../components/templates/order/index.vue";
 
-const route = useRoute();
-const slug = route.params.slug;
-
 const query = gql`
           query GetOrder($id: ID!) {
             Order(id: $id) {
               id
               name
+              image
+              shop
               currency
               description
               price
