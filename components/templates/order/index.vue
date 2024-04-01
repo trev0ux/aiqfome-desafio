@@ -154,6 +154,7 @@
               v-model="selectedOther"
               name="outros"
               :label="other.label"
+              @change="updateSelectedOthers($event, other)"
               :id="'others-' + other.id"
               :value="other.id"
               inline
@@ -203,6 +204,7 @@ export default {
       selectedSize: "",
       selectedUtensil: "",
       selectedOther: "",
+      othersSelected: [],
       aggregatedDrinksObj: {},
     };
   },
@@ -217,25 +219,51 @@ export default {
       this.totalPrice = price * this.orderQuantity;
       return this.totalPrice.toFixed(2);
     },
+    updateSelectedOthers(event, value) {
+      if (event.target.checked) {
+        this.others.forEach((other) => {
+          if (other.id === parseInt(value.id)) {
+            const alreadyExists = this.othersSelected.some(
+              (selected) => selected.id === other.id
+            );
+            if (!alreadyExists) {
+              this.othersSelected.push(other);
+            }
+          }
+        });
+      } else {
+        const index = this.othersSelected.findIndex(
+          (selected) => selected.id === value.id
+        );
+        if (index !== -1) {
+          this.othersSelected.splice(index, 1);
+        }
+      }
+    },
     aggregatedDrinks(updatedDrink) {
       if (!this.aggregatedDrinksObj) {
         this.aggregatedDrinksObj = {};
       }
       const { id, name, quantity, price } = updatedDrink;
-      const totalPrice = (quantity + 1) * price;
-
-      if (this.aggregatedDrinksObj.hasOwnProperty(name)) {
-        this.aggregatedDrinksObj[name].price = totalPrice;
+      console.log(updatedDrink);
+      if (quantity > 0) {
+        if (this.aggregatedDrinksObj.hasOwnProperty(name)) {
+          this.aggregatedDrinksObj[name].quantity += quantity;
+          this.aggregatedDrinksObj[name].price =
+            (this.aggregatedDrinksObj[name].quantity + 1) * price;
+        } else {
+          this.aggregatedDrinksObj[name] = {
+            id,
+            name,
+            price: (quantity + 1) * price,
+            quantity: quantity,
+          };
+        }
       } else {
-        this.aggregatedDrinksObj[name] = {
-          id,
-          name,
-          price: totalPrice,
-          quantity: quantity + 1,
-        };
+        if (this.aggregatedDrinksObj.hasOwnProperty(name)) {
+          delete this.aggregatedDrinksObj[name];
+        }
       }
-
-      return Object.values(this.aggregatedDrinksObj);
     },
     applyDiscount(price, discount) {
       const count = price - discount;
@@ -249,6 +277,7 @@ export default {
       if (drink) {
         const updatedDrink = { ...drink };
         drink.quantity = newQuantity;
+        updatedDrink.quantity = newQuantity;
         this.aggregatedDrinks(updatedDrink);
       }
     },
@@ -291,10 +320,17 @@ export default {
       });
     },
     submitForm() {
-      let othersSelected = [];
-      this.others.forEach((other) => {
-        othersSelected.push(other);
-      });
+      const filterSizeSelected = () => {
+        return this.sizes.filter(
+          (size) => size.id === parseInt(this.selectedSize)
+        );
+      };
+
+      const filterUtensilSelected = () => {
+        return this.utensils.filter(
+          (utensil) => utensil.id === parseInt(this.selectedUtensil)
+        );
+      };
 
       let formData = {
         ticket: {
@@ -303,14 +339,10 @@ export default {
           price: this.totalPrice.toFixed(2),
           description: this.order.description,
           currency: this.order.currency,
-          size: this.sizes.filter(
-            (size) => size.id === parseInt(this.selectedSize)
-          ),
+          size: filterSizeSelected(),
           drink: Object.values(this.aggregatedDrinksObj),
-          utensil: this.utensils.filter(
-            (utensil) => utensil.id === parseInt(this.selectedUtensil)
-          ),
-          other: othersSelected,
+          utensil: filterUtensilSelected(),
+          other: this.othersSelected,
         },
       };
 
