@@ -165,6 +165,21 @@
           </div>
         </div>
       </fieldset>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8">
+            <textarea
+              rows="3"
+              class="form-control"
+              cols="3"
+              placeholder="alguma observação do item? • opcional
+          ex: tirar algum ingrediente, ponto do prato"
+              v-model="observation"
+            >
+            </textarea>
+          </div>
+        </div>
+      </div>
       <footer class="order__submit" v-if="orderQuantity > 0">
         <div class="container">
           <button class="btn btn-primary" type="submit">ver ticket</button>
@@ -206,6 +221,7 @@ export default {
       selectedOther: "",
       othersSelected: [],
       aggregatedDrinksObj: {},
+      observation: ""
     };
   },
   created() {
@@ -245,7 +261,6 @@ export default {
         this.aggregatedDrinksObj = {};
       }
       const { id, name, quantity, price } = updatedDrink;
-      console.log(updatedDrink);
       if (quantity > 0) {
         if (this.aggregatedDrinksObj.hasOwnProperty(name)) {
           this.aggregatedDrinksObj[name].quantity += quantity;
@@ -343,6 +358,7 @@ export default {
           drink: Object.values(this.aggregatedDrinksObj),
           utensil: filterUtensilSelected(),
           other: this.othersSelected,
+          observation: this.observation
         },
       };
 
