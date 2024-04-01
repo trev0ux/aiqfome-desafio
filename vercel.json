@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "routes": [
+      {
+        "src": "/graphql",
+        "dest": "npm start",
+        "methods": ["GET", "POST"]
+      }
+    ]
+  }
+  
