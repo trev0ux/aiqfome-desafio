@@ -98,8 +98,7 @@ https://localhost:4000
 }
 ```
 
-
-Criei um mock chamado `data.json` com as informações dos produtos enviando para um servidor GraphQL para tentar me aproximar ao máximo da realidade de vocês com o uso da ferramenta.
+Para simular um servidor GraphQL criei um mock chamado `data.json` com as informações dos produtos enviando para um servidor GraphQL para tentar me aproximar ao máximo da realidade de vocês com o uso da ferramenta.
 
 ![data json](https://github.com/trev0ux/aiqfome-desafio/assets/47607723/419d1142-2c94-406d-a845-bcc8fd50410d)
 
