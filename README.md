@@ -109,9 +109,9 @@ Criei um mock chamado `data.json` com as informações dos produtos enviando par
 ![firefox_ANRyMJoWgK](https://github.com/trev0ux/aiqfome-desafio/assets/47607723/3067d291-148a-4fb9-a6ab-36a8da865533)
 
 - O usuário pode adicionar e remover quantidades do produto e esse valor refletir no preço total exibido
-- O usuário pode escolher o tamanho e somente o selecionado deve ser enviado e deve ser enviado um objeto com detalhes como preço, nome, tamanho sobre o tamanho escolhido
-- Um array com as bebidas deve ser enviado e o usuário pode iterar adicionando ou removendo um novo item
-- O usuário pode escolher um utensilio e um objeto com informações do utensilio ser enviado
+- O usuário pode escolher o tamanho do produto e somente o selecionado com um objeto com detalhes como preço, nome e tamanho deve ser enviado
+- As bebidas o usuário pode iterar adicionando ou removendo um novo item e isso deve refletir num array de objetos
+- O usuário pode escolher um utensilio e um objeto com informações detalhadas do utensilio ser enviado
 - O usuário pode escolher multiplo valores de itens adicionais, podendo ser adicionado, mudado ou removido cada valor escolhido
 - Cada produto deve ter uma tela especifica para que o pedido seja feito
 
